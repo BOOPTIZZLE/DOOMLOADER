@@ -1,0 +1,14 @@
+{
+  "name": "clean_jazz",
+  "type": "tube_amp",
+  "description": "Clean jazz amplifier with crystal clarity",
+  "gain_range": [
+    0.0,
+    0.3
+  ],
+  "recommended_settings": {
+    "gain": 0.1,
+    "tone": 0.8,
+    "volume": 0.9
+  }
+}

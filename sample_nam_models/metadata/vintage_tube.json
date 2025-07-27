@@ -1,0 +1,14 @@
+{
+  "name": "vintage_tube",
+  "type": "tube_amp",
+  "description": "Vintage tube amplifier with warm overdrive",
+  "gain_range": [
+    0.0,
+    1.0
+  ],
+  "recommended_settings": {
+    "gain": 0.6,
+    "tone": 0.7,
+    "volume": 0.8
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "modern_high_gain",
+  "type": "solid_state",
+  "description": "High-gain modern amplifier for metal tones",
+  "gain_range": [
+    0.0,
+    1.0
+  ],
+  "recommended_settings": {
+    "gain": 0.9,
+    "tone": 0.4,
+    "volume": 0.7
+  }
+}

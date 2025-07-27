@@ -1,0 +1,11 @@
+{
+  "name": "Example Amp Model",
+  "type": "tube_amp",
+  "gain_range": [
+    0.0,
+    1.0
+  ],
+  "description": "A sample NAM amp model for testing",
+  "author": "DOOMLOADER",
+  "version": "1.0"
+}

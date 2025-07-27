@@ -1,0 +1,91 @@
+# Build directories
+build/
+cmake-build-*/
+out/
+Debug/
+Release/
+x64/
+
+# IDE files
+.vscode/settings.json
+.vscode/launch.json
+.idea/
+*.swp
+*.swo
+*~
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# JUCE specific
+JuceLibraryCode/
+Builds/
+
+# Audio plugin formats
+*.vst
+*.vst3
+*.au
+*.component
+
+# Dependencies
+node_modules/
+third_party/downloads/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Package files
+*.zip
+*.tar.gz
+*.rar
+
+# Audio files (exclude large sample files but keep small examples)
+*.wav
+*.aiff
+*.flac
+!examples/**/*.wav
+!impulse_responses/examples/*.wav
+
+# Model files (can be large)
+*.nam
+*.json.bak

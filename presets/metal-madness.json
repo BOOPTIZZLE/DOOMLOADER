@@ -1,0 +1,38 @@
+{
+  "name": "Metal Madness",
+  "description": "High-gain modern metal tone with tight response",
+  "author": "DOOMLOADER Team", 
+  "category": "Metal",
+  "tags": "metal, high-gain, modern, tight, aggressive",
+  
+  "ampModelPath": "",
+  "irPath": "",
+  
+  "ampParams": {
+    "gain": 0.95,
+    "bass": 0.4,
+    "mid": 0.6,
+    "treble": 0.8,
+    "presence": 0.7,
+    "volume": 0.7,
+    "saturation": 0.3,
+    "asymmetry": 0.0,
+    "sag": 0.1
+  },
+  
+  "irWetLevel": 1.0,
+  
+  "effects": {
+    "reverbLevel": 0.05,
+    "delayLevel": 0.0,
+    "chorusLevel": 0.0,
+    "compressorThreshold": 0.7,
+    "compressorRatio": 4.0,
+    "noiseGateThreshold": 0.15
+  },
+  
+  "version": "1.0",
+  "created": "2024-01-01T00:00:00Z",
+  "modified": "2024-01-01T00:00:00Z",
+  "uuid": "metal-madness-001"
+}

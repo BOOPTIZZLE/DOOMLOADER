@@ -1,0 +1,105 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    outputs:
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
+    steps:
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: DOOMLOADER ${{ github.ref }}
+        draft: false
+        prerelease: false
+
+  build-and-upload:
+    needs: create-release
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        include:
+        - os: ubuntu-latest
+          asset_name: DOOMLOADER-Linux-x64.tar.gz
+          cmake_preset: linux-release
+        - os: macos-latest  
+          asset_name: DOOMLOADER-macOS.dmg
+          cmake_preset: macos-release
+        - os: windows-latest
+          asset_name: DOOMLOADER-Windows-x64.zip
+          cmake_preset: windows-release
+          
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        
+    - name: Install Linux dependencies
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          libasound2-dev \
+          libjack-jackd2-dev \
+          libcurl4-openssl-dev \
+          libfreetype6-dev \
+          libx11-dev \
+          libxcomposite-dev \
+          libxcursor-dev \
+          libxext-dev \
+          libxinerama-dev \
+          libxrandr-dev \
+          libxrender-dev \
+          libwebkit2gtk-4.0-dev \
+          libglu1-mesa-dev \
+          mesa-common-dev
+          
+    - name: Configure and Build
+      run: |
+        cmake -B build \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DDOOMLOADER_BUILD_PLUGIN=ON \
+          -DDOOMLOADER_BUILD_STANDALONE=ON
+        cmake --build build --config Release --parallel
+        
+    - name: Package Linux
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        cd build
+        cpack -G TGZ
+        mv *.tar.gz ../DOOMLOADER-Linux-x64.tar.gz
+        
+    - name: Package macOS  
+      if: matrix.os == 'macos-latest'
+      run: |
+        cd build
+        cpack -G DragNDrop
+        mv *.dmg ../DOOMLOADER-macOS.dmg
+        
+    - name: Package Windows
+      if: matrix.os == 'windows-latest'
+      run: |
+        cd build
+        cpack -G ZIP
+        move *.zip ../DOOMLOADER-Windows-x64.zip
+        
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ needs.create-release.outputs.upload_url }}
+        asset_path: ./${{ matrix.asset_name }}
+        asset_name: ${{ matrix.asset_name }}
+        asset_content_type: application/octet-stream

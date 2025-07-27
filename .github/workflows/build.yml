@@ -1,0 +1,116 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          libasound2-dev \
+          libjack-jackd2-dev \
+          libcurl4-openssl-dev \
+          libfreetype6-dev \
+          libx11-dev \
+          libxcomposite-dev \
+          libxcursor-dev \
+          libxext-dev \
+          libxinerama-dev \
+          libxrandr-dev \
+          libxrender-dev \
+          libwebkit2gtk-4.0-dev \
+          libglu1-mesa-dev \
+          mesa-common-dev
+          
+    - name: Configure CMake
+      run: |
+        cmake -B build \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DDOOMLOADER_BUILD_PLUGIN=ON \
+          -DDOOMLOADER_BUILD_STANDALONE=ON \
+          -DDOOMLOADER_BUILD_EXAMPLES=ON \
+          -DDOOMLOADER_ENABLE_TESTING=ON
+          
+    - name: Build
+      run: cmake --build build --config Release --parallel
+      
+    - name: Test
+      run: |
+        cd build
+        ctest --output-on-failure
+        
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: linux-build
+        path: |
+          build/src/DoomloaderApp
+          build/src/DoomloaderPlugin*
+          build/examples/basic/BasicExample
+
+  build-macos:
+    runs-on: macos-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        
+    - name: Configure CMake
+      run: |
+        cmake -B build \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DDOOMLOADER_BUILD_PLUGIN=ON \
+          -DDOOMLOADER_BUILD_STANDALONE=ON \
+          -DDOOMLOADER_BUILD_EXAMPLES=ON
+          
+    - name: Build
+      run: cmake --build build --config Release --parallel
+      
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: macos-build
+        path: |
+          build/src/DoomloaderApp.app
+          build/src/DoomloaderPlugin.vst3
+          build/src/DoomloaderPlugin.component
+
+  build-windows:
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        
+    - name: Configure CMake
+      run: |
+        cmake -B build ^
+          -DCMAKE_BUILD_TYPE=Release ^
+          -DDOOMLOADER_BUILD_PLUGIN=ON ^
+          -DDOOMLOADER_BUILD_STANDALONE=ON ^
+          -DDOOMLOADER_BUILD_EXAMPLES=ON
+          
+    - name: Build
+      run: cmake --build build --config Release --parallel
+      
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: windows-build
+        path: |
+          build/src/Release/DoomloaderApp.exe
+          build/src/Release/DoomloaderPlugin.vst3

@@ -1,0 +1,38 @@
+{
+  "name": "Vintage Crunch",
+  "description": "Classic rock crunch tone inspired by Marshall Plexi",
+  "author": "DOOMLOADER Team",
+  "category": "Crunch", 
+  "tags": "crunch, vintage, marshall, plexi, rock, classic",
+  
+  "ampModelPath": "",
+  "irPath": "",
+  
+  "ampParams": {
+    "gain": 0.65,
+    "bass": 0.5,
+    "mid": 0.7,
+    "treble": 0.6,
+    "presence": 0.5,
+    "volume": 0.75,
+    "saturation": 0.2,
+    "asymmetry": 0.3,
+    "sag": 0.4
+  },
+  
+  "irWetLevel": 0.9,
+  
+  "effects": {
+    "reverbLevel": 0.15,
+    "delayLevel": 0.1,
+    "chorusLevel": 0.0,
+    "compressorThreshold": 0.8,
+    "compressorRatio": 3.0,
+    "noiseGateThreshold": 0.05
+  },
+  
+  "version": "1.0",
+  "created": "2024-01-01T00:00:00Z",
+  "modified": "2024-01-01T00:00:00Z",
+  "uuid": "vintage-crunch-001"
+}

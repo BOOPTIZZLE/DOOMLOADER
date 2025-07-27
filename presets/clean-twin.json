@@ -1,0 +1,38 @@
+{
+  "name": "Clean Twin",
+  "description": "Classic clean Fender Twin Reverb tone",
+  "author": "DOOMLOADER Team",
+  "category": "Clean",
+  "tags": "clean, vintage, fender, twin, reverb",
+  
+  "ampModelPath": "",
+  "irPath": "",
+  
+  "ampParams": {
+    "gain": 0.3,
+    "bass": 0.6,
+    "mid": 0.5,
+    "treble": 0.7,
+    "presence": 0.4,
+    "volume": 0.8,
+    "saturation": 0.0,
+    "asymmetry": 0.1,
+    "sag": 0.2
+  },
+  
+  "irWetLevel": 0.85,
+  
+  "effects": {
+    "reverbLevel": 0.25,
+    "delayLevel": 0.0,
+    "chorusLevel": 0.0,
+    "compressorThreshold": 0.9,
+    "compressorRatio": 2.0,
+    "noiseGateThreshold": 0.0
+  },
+  
+  "version": "1.0",
+  "created": "2024-01-01T00:00:00Z",
+  "modified": "2024-01-01T00:00:00Z",
+  "uuid": "clean-twin-001"
+}
